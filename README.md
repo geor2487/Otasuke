@@ -20,6 +20,11 @@
 - **React Hook Form** + **Zod 4**
 - TypeScript 5.9
 
+### インフラ
+- **AWS EC2** (t3.micro / Amazon Linux 2023)
+- **Nginx** (リバースプロキシ)
+- **systemd** (プロセス管理)
+
 ## セットアップ
 
 ### 前提条件
