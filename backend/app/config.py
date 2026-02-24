@@ -18,6 +18,8 @@ class Settings(BaseSettings):
     S3_BUCKET_NAME: str = "kensetsu-files"
     S3_ENDPOINT_URL: str = "http://localhost:4566"
 
+    CORS_ORIGINS: str = "http://localhost:3000"
+
     APP_ENV: str = "development"
 
 
