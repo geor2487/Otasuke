@@ -7,19 +7,15 @@ import asyncio
 import uuid
 from datetime import datetime, timedelta, timezone
 
-from passlib.context import CryptContext
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
 
-from app.models.base import Base
-from app.models.user import User
+from app.config import settings
 from app.models.company import Company, Specialty, company_specialties
 from app.models.project import Project
-
-DATABASE_URL = "postgresql+asyncpg://postgres:postgres@localhost:5432/kensetsu"
-
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+from app.models.user import User
+from app.utils.security import hash_password
 
 # ---------------------------------------------------------------------------
 # 1. 専門分野マスタ
@@ -341,7 +337,7 @@ PROJECTS = [
 # メイン処理
 # ---------------------------------------------------------------------------
 async def main() -> None:
-    engine = create_async_engine(DATABASE_URL)
+    engine = create_async_engine(settings.DATABASE_URL)
     async_session = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
     async with async_session() as session:
@@ -379,7 +375,7 @@ async def main() -> None:
             user = User(
                 id=uuid.uuid4(),
                 email=c["email"],
-                hashed_password=pwd_context.hash(c["password"]),
+                hashed_password=hash_password(c["password"]),
                 role="contractor",
                 is_active=True,
             )
