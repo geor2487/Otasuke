@@ -42,7 +42,7 @@ export default function PublicHeader() {
           color: "#212121",
         }}
       >
-        <Toolbar sx={{ maxWidth: "lg", width: "100%", mx: "auto", pr: { md: 0 } }}>
+        <Toolbar sx={{ pr: { md: 0 } }}>
           {/* Logo */}
           <Typography
             variant="h6"

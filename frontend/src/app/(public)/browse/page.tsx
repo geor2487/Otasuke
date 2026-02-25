@@ -53,7 +53,7 @@ function BrowseContent() {
   });
 
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
+    <Container maxWidth={false} sx={{ py: 4, px: { xs: 2, md: 3 } }}>
       <Box sx={{ display: "flex", gap: 4, alignItems: "flex-start" }}>
         {/* Left sidebar - filter panel */}
         <Box
