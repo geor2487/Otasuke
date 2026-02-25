@@ -55,7 +55,7 @@ type CompanyFormValues = z.input<typeof companySchema>;
 
 export default function CompanyMePage() {
   const router = useRouter();
-  const { company, refreshCompany } = useAuth();
+  const { user, company, refreshCompany } = useAuth();
   const isEdit = !!company;
 
   const yearOptions = useMemo(() => {
@@ -82,7 +82,7 @@ export default function CompanyMePage() {
   // company state が実際に更新されてからナビゲーションする
   useEffect(() => {
     if (shouldNavigate && company) {
-      router.push("/dashboard");
+      router.push(user?.role === "subcontractor" ? "/browse" : "/projects");
     }
   }, [shouldNavigate, company, router]);
 
